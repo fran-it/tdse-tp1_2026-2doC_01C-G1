@@ -24,8 +24,6 @@ Las acciones del modelo Sensor se limitan a la gestión de su propio temporizado
 *   **->EV_SYS_UP:** Envía la señal validada al modelo System indicando que el botón fue liberado.
 
 
-## Eventos (Triggers)
-
 ## Tabla de transiciones
 | Current State | Event | [guard] | Next State | Action |
 | :----- | :---------------------: | :------: | :-------: | :-------: |
