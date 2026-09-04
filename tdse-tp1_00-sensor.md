@@ -1,5 +1,5 @@
 | Current State | Event | [guard] | Next State | Action |
-| :----- | :--------------------- | :------: | :-------: | :-------: |
+| :----- | :---------------------: | :------: | :-------: | :-------: |
 | ST_BTN_UP | EV_BTN_UP | x | - | - |
 | ST_BTN_UP | EV_BTN_DOWN | x | ST_BTN_FALLING | tick=DEL_BTN_50ms |
 | ST_BTN_FALLING | x | tick > 0 | - | tick-- |
