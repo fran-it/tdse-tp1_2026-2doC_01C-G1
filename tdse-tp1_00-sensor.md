@@ -5,7 +5,7 @@ El modelo **Sensor** es el encargado de leer el estado del hardware (el botón) 
 ## Eventos (Triggers)
 Los eventos que despachan las transiciones en la máquina de estados del Sensor son:
 
-*   **e_Tick_1mS:** Evento periódico generado por el planificador del sistema operativo (SysTick) cada 1 milisegundo[cite: 3].
+*   **e_Tick_1mS:** Evento periódico generado por el planificador del sistema operativo (SysTick) cada 1 milisegundo.
 *   **EV_BTN_DOWN:** Evento de hardware que indica que el botón se encuentra físicamente presionado.
 *   **EV_BTN_UP:** Evento de hardware que indica que el botón se encuentra físicamente liberado.
 
