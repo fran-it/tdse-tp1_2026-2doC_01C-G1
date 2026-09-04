@@ -2,14 +2,6 @@
 
 El modelo **System** es el encargado de procesar la lógica de negocio de la máquina expendedora de tickets. Funciona bajo un esquema de ejecución cíclica no bloqueante (*Update by Time Code*), evaluado cada 1 milisegundo, recibiendo información de los sensores y enviando comandos a los actuadores.
 
-## Eventos (Triggers)
-Los eventos que despiertan la máquina de estados del System provienen principalmente de los mensajes (signals) enviados por el modelo Sensor, o por los ticks del sistema.
-
-*   **e_Tick_1mS:** Evento periódico generado cada 1 milisegundo, utilizado para evaluar tiempos de espera o timeout.
-*   **EV_SYS_UP:** Señal recibida desde el modelo Sensor que indica que el botón fue liberado exitosamente.
-*   **EV_SYS_DOWN:** Señal recibida desde el modelo Sensor que indica que el botón fue presionado exitosamente.
-*   **EV_SYS_CAR_ARRIVED:** Señal recibida desde el modelo Sensor (emulando la cámara) que indica la presencia de un vehículo en la entrada.
-*   **EV_SYS_CAR_LEFT:** Señal recibida desde el modelo Sensor (emulando la bobina sensora) que indica que el vehículo ha avanzado y liberado la barrera.
 
 ## Variables de Control y Guardas
 El sistema puede necesitar variables internas, principalmente contadores de tiempo, para condicionar el paso entre estados.
