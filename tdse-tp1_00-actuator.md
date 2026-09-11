@@ -29,15 +29,15 @@ Las acciones del modelo Actuator consisten en modificar sus propios temporizador
 
 | Current State | Event | [Guard] | Next State | Actions |
 | :--- | :--- | :---: | :---: | :---: |
-| IDLE | SIG_ACT_PRINT_TICKET | - | PRINTING | a_Led_Printer_On, v_Actuator_Timer=T_PRINT |
-| PRINTING | e_Tick_1mS | [v_Actuator_Timer > 0] | PRINTING | v_Actuator_Timer-- |
-| PRINTING | e_Tick_1mS | [v_Actuator_Timer == 0] | IDLE | a_Led_Printer_Off |
-| IDLE | SIG_ACT_OPEN_BARRIER | - | BARRIER_OPENING | a_Led_Barrier_On, v_Actuator_Timer=T_BARRIER |
-| BARRIER_OPENING | e_Tick_1mS | [v_Actuator_Timer > 0] | BARRIER_OPENING | v_Actuator_Timer-- |
-| BARRIER_OPENING | e_Tick_1mS | [v_Actuator_Timer == 0] | IDLE | - |
-| IDLE | SIG_ACT_CLOSE_BARRIER | - | BARRIER_CLOSING | a_Led_Barrier_Off, v_Actuator_Timer=T_BARRIER |
-| BARRIER_CLOSING | e_Tick_1mS | [v_Actuator_Timer > 0] | BARRIER_CLOSING | v_Actuator_Timer-- |
-| BARRIER_CLOSING | e_Tick_1mS | [v_Actuator_Timer == 0] | IDLE | - |
-| IDLE | SIG_ACT_NOTIFY_SERVER | - | NOTIFYING | a_Led_Server_Pulse, v_Actuator_Timer=T_NOTIFY |
-| NOTIFYING | e_Tick_1mS | [v_Actuator_Timer > 0] | NOTIFYING | v_Actuator_Timer-- |
-| NOTIFYING | e_Tick_1mS | [v_Actuator_Timer == 0] | IDLE | - |
+| ST_ACT_IDLE | SIG_ACT_PRINT_TICKET | - | ST_ACT_PRINTING | a_Led_Printer_On, v_Actuator_Timer=T_PRINT |
+| ST_ACT_PRINTING | e_Tick_1mS | [v_Actuator_Timer > 0] | ST_ACT_PRINTING | v_Actuator_Timer-- |
+| ST_ACT_PRINTING | e_Tick_1mS | [v_Actuator_Timer == 0] | ST_ACT_IDLE | a_Led_Printer_Off |
+| ST_ACT_IDLE | SIG_ACT_OPEN_BARRIER | - | BARRIER_OPENING | a_Led_Barrier_On, v_Actuator_Timer=T_BARRIER |
+| ST_ACT_BARRIER_OPENING | e_Tick_1mS | [v_Actuator_Timer > 0] | ST_ACT_BARRIER_OPENING | v_Actuator_Timer-- |
+| ST_ACT_BARRIER_OPENING | e_Tick_1mS | [v_Actuator_Timer == 0] | ST_ACT_IDLE | - |
+| ST_ACT_IDLE | SIG_ACT_CLOSE_BARRIER | - | ST_ACT_BARRIER_CLOSING | a_Led_Barrier_Off, v_Actuator_Timer=T_BARRIER |
+| ST_ACT_BARRIER_CLOSING | e_Tick_1mS | [v_Actuator_Timer > 0] | ST_ACT_BARRIER_CLOSING | v_Actuator_Timer-- |
+| ST_ACT_BARRIER_CLOSING | e_Tick_1mS | [v_Actuator_Timer == 0] | ST_ACT_IDLE | - |
+| ST_ACT_IDLE | SIG_ACT_NOTIFY_SERVER | - | NOTIFYING | a_Led_Server_Pulse, v_Actuator_Timer=T_NOTIFY |
+| ST_ACT_NOTIFYING | e_Tick_1mS | [v_Actuator_Timer > 0] | ST_ACT_NOTIFYING | v_Actuator_Timer-- |
+| ST_ACT_NOTIFYING | e_Tick_1mS | [v_Actuator_Timer == 0] | IDLE | - |
