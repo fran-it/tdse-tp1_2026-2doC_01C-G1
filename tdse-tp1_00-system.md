@@ -26,3 +26,21 @@ Las acciones del modelo System consisten en modificar variables internas o, fund
 *   **SIG_ACT_OPEN_BARRIER:** Envía una señal al modelo Actuator para que encienda el LED que emula la apertura de la barrera.
 *   **SIG_ACT_CLOSE_BARRIER:** Envía una señal al modelo Actuator para que apague el LED que emula la barrera (cerrándola).
 *   **SIG_ACT_NOTIFY_SERVER:** Envía una señal al modelo Actuator para que encienda el LED que emula el aviso al servidor de que el auto ha ingresado.
+
+| Current State           |        Event       |            [guard]            |        Next State       |          Action         |
+| :---------------------- | :----------------: | :---------------------------: | :---------------------: | :---------------------: |
+| ST_SYSTEM_IDLE          | EV_SYS_CAR_ARRIVED |               x               |    ST_SYSTEM_WAIT_BTN   |      a_Timer_Reset      |
+| ST_SYSTEM_IDLE          |   EV_SYS_CAR_LEFT  |               x               |            -            |            -            |
+| ST_SYSTEM_IDLE          |     EV_SYS_DOWN    |               x               |            -            |            -            |
+| ST_SYSTEM_IDLE          |      EV_SYS_UP     |               x               |            -            |            -            |
+| ST_SYSTEM_WAIT_BTN      |     e_Tick_1mS     |               x               |            -            |    a_Timer_Increment    |
+| ST_SYSTEM_WAIT_BTN      |     EV_SYS_DOWN    |               x               |     ST_SYSTEM_PRINT     |      a_Timer_Reset      |
+| ST_SYSTEM_WAIT_BTN      |   EV_SYS_CAR_LEFT  |               x               |      ST_SYSTEM_IDLE     |      a_Timer_Reset      |
+| ST_SYSTEM_WAIT_BTN      |     e_Tick_1mS     | [v_System_Timer >= T_TIMEOUT] |      ST_SYSTEM_IDLE     |      a_Timer_Reset      |
+| ST_SYSTEM_PRINT         |          x         |               x               |  ST_SYSTEM_OPEN_BARRIER |  ->SIG_ACT_PRINT_TICKET |
+| ST_SYSTEM_OPEN_BARRIER  |          x         |               x               |    ST_SYSTEM_WAIT_CAR   |  ->SIG_ACT_OPEN_BARRIER |
+| ST_SYSTEM_WAIT_CAR      |     e_Tick_1mS     |               x               |            -            |    a_Timer_Increment    |
+| ST_SYSTEM_WAIT_CAR      |   EV_SYS_CAR_LEFT  |               x               | ST_SYSTEM_CLOSE_BARRIER | ->SIG_ACT_CLOSE_BARRIER |
+| ST_SYSTEM_WAIT_CAR      |     e_Tick_1mS     | [v_System_Timer >= T_TIMEOUT] |      ST_SYSTEM_IDLE     |      a_Timer_Reset      |
+| ST_SYSTEM_CLOSE_BARRIER |          x         |               x               |     ST_SYSTEM_NOTIFY    | ->SIG_ACT_CLOSE_BARRIER |
+| ST_SYSTEM_NOTIFY        |          x         |               x               |      ST_SYSTEM_IDLE     | ->SIG_ACT_NOTIFY_SERVER |
